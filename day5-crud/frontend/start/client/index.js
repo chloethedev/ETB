@@ -39,6 +39,77 @@ const initContract = () => {
 };
 
 const initApp = () => {
+  const $create = document.getElementById('create');
+  const $createResult = document.getElementById('create-result');
+  const $read = document.getElementById('read');
+  const $readResult = document.getElementById('read-result');
+  const $edit = document.getElementById('edit');
+  const $editResult = document.getElementById('edit-result');
+  const $delete = document.getElementById('delete');
+  const $deleteResult = document.getElementById('delete-result');
+  let accounts = [];
+
+  web3.eth.getAccounts()
+  .then(_accounts => {
+    accounts = _accounts;
+  });
+
+  $create.addEventListener('submit', e => {
+    e.preventDevault();
+    const name = e.target.elements[0].value;
+    crud.methods
+      .create(name)
+      .send({from: accounts[0]})
+      .then(() => {
+        $createResult.innerHTML = `New user ${name} was successfully created`;
+      })
+      .catch(() => {
+        $createResult.innerHTML = `Ooops... there was an error while trying to create a new user....`;
+      });
+  });
+
+  $read.addEventListener('submit', e => {
+    e.preventDefault();
+    const id = e.target.elements[0].value;
+    crud.methods
+    .read(id)
+    .call()
+    .then(resault => {
+      $readResult.innerHTML = `Id: ${result[0]} Name: ${result[1]}`;
+    })
+    .catch(() => {
+      $readResult.innerHTML = `Ooops... there was a problem while trying to read user ${id}`;
+    });
+  });
+
+  $edit.addEventListener('submit', e => {
+    e.preventDefault();
+    const id = e.target.elements[0].value;
+    const name = e.target.elements[1].value;
+    crud.methods
+    .update(id, name)
+    .send({from: accounts[0]})
+    .then (() => {
+      $editResult.innerHTML = `Change name of user ${id} to ${name}`;
+    })
+    .catch(() => {
+      $readResult.innerHTML = `Ooops... there was an error while trying to update user ${id}`
+    });
+  });
+
+  $delete.addEventListener('submit', e => {
+    e.preventDefault();
+    const id = e.target.elements[0].value;
+    crud.methods
+    .destroy(id)
+    .send({from: accounts[0]})
+    .then (() => {
+      $deleteResult.innerHTML = `Id ${id} was sucessfully deleted`;
+    })
+    .catch(() => {
+      $readResult.innerHTML = `Ooops... there was an error while trying to delete user ${id}`;
+    }); 
+  });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
