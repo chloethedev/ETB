@@ -55,11 +55,9 @@ const initApp = () => {
   });
 
   $create.addEventListener('submit', e => {
-    e.preventDevault();
+    e.preventDefault();
     const name = e.target.elements[0].value;
-    crud.methods
-      .create(name)
-      .send({from: accounts[0]})
+    crud.methods.create(name).send({from: accounts[0]})
       .then(() => {
         $createResult.innerHTML = `New user ${name} was successfully created`;
       })
@@ -74,7 +72,7 @@ const initApp = () => {
     crud.methods
     .read(id)
     .call()
-    .then(resault => {
+    .then(result => {
       $readResult.innerHTML = `Id: ${result[0]} Name: ${result[1]}`;
     })
     .catch(() => {

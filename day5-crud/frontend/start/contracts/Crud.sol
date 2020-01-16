@@ -13,7 +13,7 @@ contract Crud {
     nextId++;
   }
 
-  function read(uint id) view public returns(uint, string memory) {
+  function read(uint id) public view returns(uint, string memory) {
     uint i = find(id);
     return(users[i].id, users[i].name);
   }
@@ -28,7 +28,7 @@ contract Crud {
     delete users[i];
   }
 
-  function find(uint id) view internal returns(uint) {
+  function find(uint id) internal view returns(uint) {
     for(uint i = 0; i < users.length; i++) {
       if(users[i].id == id) {
         return i;
