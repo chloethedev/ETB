@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import EtherWallet from '../build/contracts/EtherWallet.json';
 
 let web3;
-let EtherWallet;
+let etherWallet;
 
 const initWeb3 = () => {
   return new Promise((resolve, reject) => {
@@ -39,8 +39,60 @@ const initContract = async () => {
 };
 
 const initApp = () => {
-  
-}
+  const $deposit = document.getElementById('deposit');
+  const $depositResult = document.getElementById('deposit-result');
+  const $send = document.getElementById('send');
+  const $sendResult = document.getElementById('send-result');
+  const $balance = document.getElementById('balance');
+  let accounts = [];
+
+  web3.eth.getAccounts()
+  .then(_accounts => {
+    accounts = _accounts;
+  });
+
+  const refreshBalance = () => {
+    etherWallet.methods
+      .balanceOf()
+      .call()
+      .then(result => {
+        $balance.innerHTML = result;
+      });
+  };
+  refreshBalance();
+
+  $deposit.addEventListener('submit', e => {
+    e.preventDefault();
+    const amount = e.target.elements[0].value;
+    etherWallet.methods
+    .deposit()
+    .send({from: accounts[0], value: amount})
+      .then(() => {
+        $depositResult.innerHTML = `Sucessfully deposited ${amount} was successfully created`;
+        refreshBalance();
+      })
+      .catch(() => {
+        $depositResult.innerHTML = `Ooops... there was an error while trying to deposit ether....`;
+      });
+  });
+
+  $send.addEventListener('submit', e => {
+    e.preventDefault();
+    const to = e.target.elements[0].value;
+    const amount = e.target.elements[1].value;
+    etherWallet.methods
+    .send(to, amount)
+      .send({from: accounts[0]})
+      .then(() => {
+        $sendResult.innerHTML = `${amount} Wei was successfully sent to ${to} `;
+        refreshBalance();
+      })
+      .catch(() => {
+        $sendResult.innerHTML = `Ooops... there was an error while trying to send ether from contract....`;
+      });
+  });
+};
+
 
 document.addEventListener('DOMContentLoaded', () => {
   initWeb3()
@@ -54,3 +106,4 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(e => console.log(e.message));
 });
+
