@@ -39,6 +39,7 @@ const initContract = async () => {
 };
 
 const initApp = () => {
+  
 }
 
 document.addEventListener('DOMContentLoaded', () => {
