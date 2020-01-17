@@ -41,7 +41,6 @@ const initContract = async () => {
 const initApp = () => {
   const $send = document.getElementById('send');
   const $sendResult = document.getElementById('send-result')
-  const $balance = document.getElementById('balance');
   let accounts = [];
 
   web3.eth.getAccounts()
@@ -49,34 +48,23 @@ const initApp = () => {
     accounts = _accounts;
   });
 
-  const refreshBalance = () => {
-    etherWallet.methods
-      .balanceOf()
-      .call()
-      .then(result => {
-        $balance.innerHTML = result;
-      });
-  };
-  refreshBalance();
-
-
   $send.addEventListener('submit', e => {
     e.preventDefault();
-    const to = [e.target.elements[1].value];
-    const amount = [e.target.elements[2].value];
+    const to = e.target.elements[0].value.split(',');
+    const amount = e.target.elements[1].value
+      .split(',')
+      .map(val => parseInt(val));
+    const total = amount.reduce((sum, val) => sum += val);
     splitPayment.methods
     .send(to, amount)
-      .send({from: accounts[0]})
+      .send({from: accounts[0], value: total})
       .then(() => {
-        $sendResult.innerHTML = `${amount} Wei was successfully sent to ${to} `;
-        refreshBalance();
+        $sendResult.innerHTML = `Transfer sent! `;
       })
       .catch(() => {
-        $sendResult.innerHTML = `Ooops... there was an error while trying to send ether from contract....`;
-      })
-  })
-
-
+        $sendResult.innerHTML = `Ooops... there was an error while trying to send a spilt payment....`;
+      });
+  });
 };
 
 

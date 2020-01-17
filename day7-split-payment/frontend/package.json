@@ -1,5 +1,5 @@
 {
-  "name": "day5-crud",
+  "name": "day7-split-payment",
   "version": "1.0.0",
   "description": "",
   "main": "truffle-config.js",
@@ -16,5 +16,9 @@
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.0.28",
+    "truffle-hdwallet-provider": "^1.0.17"
   }
 }
