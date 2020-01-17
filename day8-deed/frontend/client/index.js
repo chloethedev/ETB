@@ -39,6 +39,37 @@ const initContract = async () => {
 };
 
 const initApp = () => {
+  const $withdraw = document.getElementById('withdraw');
+  const $withdrawResult = document.getElementById('withdraw-result');
+  const $balance = document.getElementById('balance');
+  let accounts = [];
+
+  web3.eth.getAccounts()
+  .then(_accounts => {
+    accounts = _accounts;
+  });
+
+  const refreshBalance = () => {
+    web3.eth.getBalance(deed.options.address)
+    .then(balance => {
+      $balance.innerHTML = balance;
+    });
+  }
+
+  $withdraw.addEventListener('submit', e => {
+    e.preventDefault();
+    deed.methods
+    .$withdraw
+    .then(() => {
+      $withdrawResult.innerHTML = `Withdrawal succesful`;
+      refreshBalance();
+    })
+    .catch(() => {
+      $withdrawResult.innerHTML = `Oooops... there was an error trying to withdraw...`
+    })
+  })
+
+  refreshBalance();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
