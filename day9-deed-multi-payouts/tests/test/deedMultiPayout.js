@@ -6,6 +6,41 @@ contract('DeedMultiPayout', (accounts) => {
     deedMultiPayout = await DeedMultiPayout.deployed();
   });
 
+  it('should withdraw for all payouts (1)', async () => {
+    const deedMultiPayout = await DeedMultiPayout.new(
+      accounts[0], 
+      accounts[1], 
+      1, 
+      {value: 100}
+    );
+    for(let i = 0; i < 4; i++) {
+      const initialBalance = web3.utils.toBN(await web3.eth.getBalance(accounts[1]));
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await deedMultiPayout.withdraw({from: accounts[0]});
+      const finalBalance = web3.utils.toBN(await web3.eth.getBalance(accounts[1]));
+      assert(finalBalance.sub(initialBalance).toNumber() === 25);
+    }
+  });
+
+  it('should withdraw for all payouts (2)', async () => {
+    const deedMultiPayout = await DeedMultiPayout.new(
+      accounts[0], 
+      accounts[1], 
+      1, 
+      {value: 100}
+    );
+    for(let i = 0; i < 2; i++) {
+      const initialBalance = web3.utils.toBN(await web3.eth.getBalance(accounts[1]));
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      await deedMultiPayout.withdraw({from: accounts[0]});
+      const finalBalance = web3.utils.toBN(await web3.eth.getBalance(accounts[1]));
+      assert(finalBalance.sub(initialBalance).toNumber() === 50);
+    }
+  });
+
+
+
+
   it('should NOT withdraw if too early', async () => {
     const deedMultiPayout = await DeedMultiPayout.new(
       accounts[0], 
@@ -26,7 +61,7 @@ contract('DeedMultiPayout', (accounts) => {
     const deedMultiPayout = await DeedMultiPayout.new(
       accounts[0], 
       accounts[1], 
-      5, 
+      0, 
       {value: 100}
     );
     try {
