@@ -21,15 +21,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"n\",\"type\":\"uint256\"}],\"name\":\"fib\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/chloethedev/Dapps/ETB/day12-fibonacci/frontend/contracts/Fibonacci.sol\":\"Fibonacci\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/chloethedev/Dapps/ETB/day12-fibonacci/frontend/contracts/Fibonacci.sol\":{\"keccak256\":\"0x62134e05223a413d03665bf8087b82b603e467ee3a32384e5269acd486e4d06a\",\"urls\":[\"bzzr://bafe0f7c9c62a99712e72c5cb212d9989ebc83e6b78f7ef9b143d5e96478baf1\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50610106806100206000396000f3fe6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063c6c2ea1714604a575b600080fd5b607360048036036020811015605e57600080fd5b81019080803590602001909291905050506089565b6040518082815260200191505060405180910390f35b600080821415609a576000905060d5565b6000600190506000600190506000600290505b8481101560ce576000828401905083925080935050808060010191505060ad565b5081925050505b91905056fea165627a7a72305820c3ce556bcd8f7541ecca9d0b15596507097240ffc8fab8d8494d3c22a9d8d2e50029",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063c6c2ea1714604a575b600080fd5b607360048036036020811015605e57600080fd5b81019080803590602001909291905050506089565b6040518082815260200191505060405180910390f35b600080821415609a576000905060d5565b6000600190506000600190506000600290505b8481101560ce576000828401905083925080935050808060010191505060ad565b5081925050505b91905056fea165627a7a72305820c3ce556bcd8f7541ecca9d0b15596507097240ffc8fab8d8494d3c22a9d8d2e50029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"n\",\"type\":\"uint256\"}],\"name\":\"fib\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/jklepatch/ETB/code/dapp-30/day12-fibonacci/frontend/end/contracts/Fibonacci.sol\":\"Fibonacci\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jklepatch/ETB/code/dapp-30/day12-fibonacci/frontend/end/contracts/Fibonacci.sol\":{\"keccak256\":\"0x62134e05223a413d03665bf8087b82b603e467ee3a32384e5269acd486e4d06a\",\"urls\":[\"bzzr://bafe0f7c9c62a99712e72c5cb212d9989ebc83e6b78f7ef9b143d5e96478baf1\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610106806100206000396000f3fe6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063c6c2ea1714604a575b600080fd5b607360048036036020811015605e57600080fd5b81019080803590602001909291905050506089565b6040518082815260200191505060405180910390f35b600080821415609a576000905060d5565b6000600190506000600190506000600290505b8481101560ce576000828401905083925080935050808060010191505060ad565b5081925050505b91905056fea165627a7a72305820eef232cdbe24ec046bb58bdca36b87d833c66fc71d9f9e91ad21084eef623cb10029",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063c6c2ea1714604a575b600080fd5b607360048036036020811015605e57600080fd5b81019080803590602001909291905050506089565b6040518082815260200191505060405180910390f35b600080821415609a576000905060d5565b6000600190506000600190506000600290505b8481101560ce576000828401905083925080935050808060010191505060ad565b5081925050505b91905056fea165627a7a72305820eef232cdbe24ec046bb58bdca36b87d833c66fc71d9f9e91ad21084eef623cb10029",
   "sourceMap": "25:278:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:278:0;;;;;;;",
   "deployedSourceMap": "25:278:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:278:0;;;;;;;;;;;;;;;;;;;;48:253;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;48:253:0;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;91:4;111:1;106;:6;103:34;;;129:1;122:8;;;;103:34;142:9;154:1;142:13;;161:9;173:1;161:13;;184:6;193:1;184:10;;180:100;200:1;196;:5;180:100;;;216:7;233:4;226;:11;216:21;;252:4;245:11;;271:2;264:9;;180:100;203:3;;;;;;;180:100;;;;292:4;285:11;;;;48:253;;;;:::o",
   "source": "pragma solidity ^0.5.2;\n\ncontract Fibonacci {\n  function fib(uint n) pure external returns(uint) {\n    if(n == 0) {\n      return 0;\n    }\n    uint fi_1 = 1;\n    uint fi_2 = 1;\n    for(uint i = 2; i < n; i++) {\n      uint fi = fi_1 + fi_2;\n      fi_2 = fi_1;\n      fi_1 = fi;\n    }\n    return fi_1;\n  }\n}\n",
-  "sourcePath": "/home/chloethedev/Dapps/ETB/day12-fibonacci/frontend/contracts/Fibonacci.sol",
+  "sourcePath": "/Users/jklepatch/ETB/code/dapp-30/day12-fibonacci/frontend/end/contracts/Fibonacci.sol",
   "ast": {
-    "absolutePath": "/home/chloethedev/Dapps/ETB/day12-fibonacci/frontend/contracts/Fibonacci.sol",
+    "absolutePath": "/Users/jklepatch/ETB/code/dapp-30/day12-fibonacci/frontend/end/contracts/Fibonacci.sol",
     "exportedSymbols": {
       "Fibonacci": [
         53
@@ -689,7 +689,7 @@
     "src": "0:304:0"
   },
   "legacyAST": {
-    "absolutePath": "/home/chloethedev/Dapps/ETB/day12-fibonacci/frontend/contracts/Fibonacci.sol",
+    "absolutePath": "/Users/jklepatch/ETB/code/dapp-30/day12-fibonacci/frontend/end/contracts/Fibonacci.sol",
     "exportedSymbols": {
       "Fibonacci": [
         53
@@ -1356,19 +1356,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x03F6061Df62404A31f50F32bAd41409BB5C65eBb",
-      "transactionHash": "0x95048fd02707ae13392d973a4fe47fa5c69fce3aa897b6835728447a4dc62482"
-    },
-    "1579553647897": {
-      "events": {},
-      "links": {},
-      "address": "0xBc3D981f2d3C52cc70faB1efC70d55ef84d47C41",
-      "transactionHash": "0x22f352865b9471066050cba005c086fe4fd6aa17f1603c83b310694ac79018cb"
+      "address": "0xCB2ebb9cE533EA4c8c409a07C3d7829A65E4dbf7",
+      "transactionHash": "0x676bbea3e7d8feed8fa3fa1b48c51f9ae9424c87f8145e6f292c6b787dd20257"
     }
   },
-  "schemaVersion": "3.0.20",
-  "updatedAt": "2020-01-20T21:07:22.330Z",
-  "networkType": "ethereum",
+  "schemaVersion": "3.0.11",
+  "updatedAt": "2019-09-09T19:06:57.759Z",
   "devdoc": {
     "methods": {}
   },

@@ -19,13 +19,13 @@ function App() {
       );
       setWeb3(web3);
       setContract(contract);
+      console.log(contract);
     }
     init();
   }, []);
 
   async function calculate(e) {
     e.preventDefault();
-    // console.log(contract);
     const result = await contract.methods
       .fib(e.target.elements[0].value)
       .call();
@@ -44,7 +44,7 @@ function App() {
         <div className="col-sm-12">
           <form onSubmit={e => calculate(e)}>
             <div className="form-group">
-              <label htmlFor="number">Fibonacci sequence of</label>
+              <label htmlFor="number">Fibonacci sequence of:</label>
               <input type="number" className="form-control" id="number" />
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
