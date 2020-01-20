@@ -24,10 +24,6 @@ function App() {
       init();
   }, []);
 
-  if (!web3) {
-    return <div>Loading...</div>;
-  }
-
   async function calculateLength(e) {
     e.preventDefault();
     const length = await contract.methods
@@ -45,6 +41,10 @@ function App() {
     )
     .call();
     setConcatenation(concatenation)
+  }
+
+    if (!web3) {
+    return <div>Loading...</div>;
   }
 
   return (

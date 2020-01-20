@@ -5,6 +5,7 @@ import { getWeb3 } from './utils.js';
 function App() {
   const [web3, setWeb3] = useState(undefined);
   const [contract, setContract] = useState(undefined);
+  const [result, setResult] = useState(undefined);
 
   useEffect(() => {
     const init = async () => {
@@ -14,13 +15,23 @@ function App() {
       const deployedNetwork = Fibonacci.networks[networkId];
       const contract = new web3.eth.Contract(
         Fibonacci.abi,
-        deployedNetwork && deployedNetwork.address,
+        deployedNetwork && deployedNetwork.address
       );
       setWeb3(web3);
       setContract(contract);
     }
     init();
   }, []);
+
+  async function calculate(e) {
+    e.preventDefault();
+    // console.log(contract);
+    const result = await contract.methods
+      .fib(e.target.elements[0].value)
+      .call();
+    setResult(result);
+  }
+
   if (!web3) {
     return <div>Loading...</div>;
   }
@@ -31,7 +42,7 @@ function App() {
 
       <div className="row">
         <div className="col-sm-12">
-          <form>
+          <form onSubmit={e => calculate(e)}>
             <div className="form-group">
               <label htmlFor="number">Fibonacci sequence of</label>
               <input type="number" className="form-control" id="number" />
