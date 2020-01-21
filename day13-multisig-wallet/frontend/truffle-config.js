@@ -8,5 +8,12 @@ module.exports = {
     solc: {
       version: '0.5.2'
     }
+  },
+  networks: {
+    ganache: {
+      host: "localhost",
+      port: 8545,
+      network_id: "*" // Match any network id
+    }
   }
 };
