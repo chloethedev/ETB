@@ -5,6 +5,8 @@ import { getWeb3 } from './utils.js';
 function App() {
   const [web3, setWeb3] = useState(undefined);
   const [accounts, setAccounts] = useState(undefined);
+  const [admin, setAdmin] = useState(undefined);
+  const [ballots, setBallots] = useState([]);
   const [contract, setContract] = useState(undefined);
 
   useEffect(() => {
@@ -18,25 +20,53 @@ function App() {
         deployedNetwork && deployedNetwork.address,
       );
 
+      const admin = await contract.methods
+        .admin()
+        .call();
+
       setWeb3(web3);
       setAccounts(accounts);
       setContract(contract);
+      setAdmin(admin);
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
       setAccounts(accounts);
     });
-  }, []);
+    }, []);
+
+    useEffect(() => {
+      if(isReady()) {
+        updateBallots();
+      }
+    }, [accounts, contract, web3, admin]);
 
   const isReady = () => {
     return (
       typeof contract !== 'undefined' 
       && typeof web3 !== 'undefined'
       && typeof accounts !== 'undefined'
+      && typeof admin !== 'undefined'
     );
   }
 
-  const createBallot =e => {
+  async function updateBallots() {
+    const nextBallotId = parseInt(await contract.methods
+      .nextBallotId()
+      .call());
+
+    const ballots = [];
+    for(let i = 0; i < nextBallotId; i++) {
+      const [ballot, hasVoted] = await Promise.all([
+        contract.methods.getBallot(i).call(),
+        contract.methods.votes(accounts[0], i).call()
+      ]);
+      ballots.push({...ballot, hasVoted});
+    }
+    setBallots(ballots);
+  }
+
+  async function createBallot(e) {
     e.preventDefault();
     const name = e.target.elements[0].value;
     const choices = e.target.elements[1].value.split(',');
@@ -44,6 +74,31 @@ function App() {
     await contract.methods
       .createBallot(name, choices, duration)
       .send({from: accounts[0]});
+    await updateBallots();
+  };
+
+  async function addVoters(e) {
+    e.preventDefault();
+    const voters = e.target.elements[0].value.split(',');
+    await contract.methods
+      .addVoters(voters)
+      .send({from: accounts[0]});
+  };
+
+  async function vote (e, ballotId) {
+    e.preventDefault();
+    const select = e.target.elements[0];
+    const choiceId = select.options[select.selectedIndex].value;
+    await contract.methods
+      .vote(ballotId, choiceId)
+      .send({from: accounts[0]});
+    await updateBallots();
+  };
+
+  function isFinished(ballot) {
+    const now = (new Date()).getTime();
+    const ballotEnd = (new Date(parseInt(ballot.end) * 1000)).getTime();
+    return (ballotEnd - now) > 0 ? false : true;
   }
 
   if (!isReady()) {
@@ -54,6 +109,8 @@ function App() {
     <div className="container">
       <h1 className="text-center">Voting</h1>
 
+      {accounts[0].toLowerCase() === admin.toLowerCase() ? (
+        <>
       <div className="row">
         <div className="col-sm-12">
           <h2>Create ballot</h2>
@@ -80,7 +137,7 @@ function App() {
       <div className="row">
         <div className="col-sm-12">
           <h2>Add voters</h2>
-          <form>
+          <form onSubmit={e => addVoters(e)}>
             <div className="form-group">
               <label htmlFor="voters">Voters</label>
               <input type="text" className="form-control" id="voters" />
@@ -91,6 +148,8 @@ function App() {
       </div>
 
       <hr/>
+      </>
+      ) : null}
 
       <div className="row">
         <div className="col-sm-12">
@@ -106,6 +165,50 @@ function App() {
               </tr>
             </thead>
             <tbody>
+              {ballots.map(ballot => (
+                <tr key={ballot.id}>
+                    <td>{ballot.id}</td>
+                    <td>{ballot.name}</td>
+                    <td>
+                      <ul>
+                      {ballot.choices.map(choice => (
+                          <li key={choice.id}>
+                            id: {choice.id},
+                            name: {choice.name},
+                            votes: {choice.votes}
+                          </li>
+                      ))}
+                      </ul>
+                    </td>
+                    <td>
+                        {isFinished(ballot) ? 'Vote finished' : (
+                          ballot.hasVoted ? 'You already voted' : (
+                          <form onSubmit={e => vote(e, ballot.id)}>
+                            <div className="form-group">
+                              <label htmlFor="choice">Choice</label>
+                              <select id="choice" className="form-control">
+                                {ballot.choices.map(choice => (
+                                  <option
+                                    key={choice.id}
+                                    value={choice.id}>
+                                      {choice.name}
+                                  </option>
+                                ))}
+                            </select>
+                          </div>
+                          <button
+                            type="submit"
+                            className="btn btn-primary">
+                            Submit
+                          </button>
+                        </form>
+                        ))}
+                    </td>
+                    <td>
+                      {(new Date(parseInt(ballot.end)*1000)).toLocaleString()}
+                    </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

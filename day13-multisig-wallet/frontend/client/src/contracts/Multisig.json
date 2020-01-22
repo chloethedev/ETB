@@ -5027,10 +5027,16 @@
       "links": {},
       "address": "0x04AB7EC874a8a8d60a532D3f237b272604422a62",
       "transactionHash": "0x4f8f8252af1ce9d7cf6295ee28b9ad347cd93683449a5fd3d727731bbbce5586"
+    },
+    "1579658153872": {
+      "events": {},
+      "links": {},
+      "address": "0x5afdEEf504a2F04bb6265D53DD5Ab05A74f9631e",
+      "transactionHash": "0xb62d4ea7d25012bad44a05b057e38bab0a49772d9f670a4bb850dee3a802fdb1"
     }
   },
   "schemaVersion": "3.0.20",
-  "updatedAt": "2020-01-21T22:27:38.629Z",
+  "updatedAt": "2020-01-22T02:00:30.668Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

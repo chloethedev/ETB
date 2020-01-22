@@ -18,9 +18,8 @@ function App() {
       const deployedNetwork = Multisig.networks[networkId];
       const contract = new web3.eth.Contract(
         Multisig.abi,
-        deployedNetwork && deployedNetwork.address
+        deployedNetwork && deployedNetwork.address,
       );
-
       const quorum = await contract.methods
         .quorum()
         .call();
@@ -29,6 +28,7 @@ function App() {
       setAccounts(accounts);
       setContract(contract);
       setQuorum(quorum);
+      console.log(contract);
     }
     init();
     window.ethereum.on('accountsChanged', accounts => {
