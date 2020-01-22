@@ -36,6 +36,16 @@ function App() {
     );
   }
 
+  const createBallot =e => {
+    e.preventDefault();
+    const name = e.target.elements[0].value;
+    const choices = e.target.elements[1].value.split(',');
+    const duration = e.target.elements[2].value;
+    await contract.methods
+      .createBallot(name, choices, duration)
+      .send({from: accounts[0]});
+  }
+
   if (!isReady()) {
     return <div>Loading...</div>;
   }
@@ -47,7 +57,7 @@ function App() {
       <div className="row">
         <div className="col-sm-12">
           <h2>Create ballot</h2>
-          <form>
+          <form onSubmit={e => createBallot(e)}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input type="text" className="form-control" id="name" />

@@ -14,7 +14,7 @@ contract Voting {
     Choice[] choices;
     uint end;
   }
-  mapping(uint => Ballot) ballots;
+  mapping(uint => Ballot) public ballots;
   uint nextBallotId;
   address public admin;
   mapping(address => mapping(uint => bool)) votes;
