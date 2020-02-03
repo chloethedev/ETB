@@ -8,8 +8,7 @@
     "@drizzle/store": "^1.5.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "^3.2.0",
-    "web3": "^1.2.5"
+    "react-scripts": "^3.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
