@@ -4,6 +4,9 @@ import { drizzleReactHooks } from "@drizzle/react-plugin";
 
 import drizzleOptions from "./drizzleOptions";
 import LoadingContainer from './LoadingContainer.js';
+import ICOInfo from "./ICOInfo";
+import Investor from "./Investor";
+import Admin from "./Admin";
 
 const drizzle = new Drizzle(drizzleOptions);
 const { DrizzleProvider } = drizzleReactHooks;
@@ -14,7 +17,9 @@ function App() {
       <h1>ICO</h1>
       <DrizzleProvider drizzle={drizzle}>
         <LoadingContainer>
-          <p>Loaded...</p>
+          <ICOInfo />
+          <Investor />
+          <Admin />
         </LoadingContainer>
       </DrizzleProvider>
     </div>
