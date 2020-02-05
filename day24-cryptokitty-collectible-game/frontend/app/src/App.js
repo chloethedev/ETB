@@ -14,7 +14,7 @@ const { DrizzleProvider } = drizzleReactHooks;
 function App() {
   return (
     <div className="container">
-      <h1>Cryptokitty</h1>
+      <h1>Crypto Robots!</h1>
       <DrizzleProvider drizzle={drizzle}>
         <LoadingContainer>
           <Catalogue />
